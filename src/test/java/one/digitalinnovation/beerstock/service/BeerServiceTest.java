@@ -27,17 +27,14 @@ import static org.mockito.Mockito.*;
 public class BeerServiceTest {
 
     private static final long INVALID_BEER_ID = 1L;
-
+    private final BeerMapper beerMapper = BeerMapper.INSTANCE;
     @Mock
     private BeerRepository beerRepository;
-
-    private final BeerMapper beerMapper = BeerMapper.INSTANCE;
-
     @InjectMocks
     private BeerService beerService;
 
     @Test
-    void whenBeerInformedThenItShouldBeCreated() throws BeerAlreadyRegisteredException {
+    void whenBeerInformedThenItShouldBeCreated() {
         // given
         BeerDTO expectedBeerDTO = BeerDTOBuilder.builder().build().toBeerDTO();
         Beer expectedSavedBeer = beerMapper.toModel(expectedBeerDTO);
@@ -70,7 +67,7 @@ public class BeerServiceTest {
     }
 
     @Test
-    void whenValidBeerNameIsGivenThenReturnABeer() throws BeerNotFoundException {
+    void whenValidBeerNameIsGivenThenReturnABeer() {
         // given
         BeerDTO expectedFoundBeerDTO = BeerDTOBuilder.builder().build().toBeerDTO();
         Beer expectedFoundBeer = beerMapper.toModel(expectedFoundBeerDTO);
@@ -124,7 +121,7 @@ public class BeerServiceTest {
     }
 
     @Test
-    void whenExclusionIsCalledWithValidIdThenABeerShouldBeDeleted() throws BeerNotFoundException {
+    void whenExclusionIsCalledWithValidIdThenABeerShouldBeDeleted() {
         // given
         BeerDTO expectedDeletedBeerDTO = BeerDTOBuilder.builder().build().toBeerDTO();
         Beer expectedDeletedBeer = beerMapper.toModel(expectedDeletedBeerDTO);
@@ -141,7 +138,7 @@ public class BeerServiceTest {
     }
 
     @Test
-    void whenIncrementIsCalledThenIncrementBeerStock() throws BeerNotFoundException, BeerStockExceededException {
+    void whenIncrementIsCalledThenIncrementBeerStock() {
         //given
         BeerDTO expectedBeerDTO = BeerDTOBuilder.builder().build().toBeerDTO();
         Beer expectedBeer = beerMapper.toModel(expectedBeerDTO);
@@ -190,9 +187,9 @@ public class BeerServiceTest {
 
         assertThrows(BeerNotFoundException.class, () -> beerService.increment(INVALID_BEER_ID, quantityToIncrement));
     }
-//
+
 //    @Test
-//    void whenDecrementIsCalledThenDecrementBeerStock() throws BeerNotFoundException, BeerStockExceededException {
+//    void whenDecrementIsCalledThenDecrementBeerStock() {
 //        BeerDTO expectedBeerDTO = BeerDTOBuilder.builder().build().toBeerDTO();
 //        Beer expectedBeer = beerMapper.toModel(expectedBeerDTO);
 //
@@ -208,7 +205,7 @@ public class BeerServiceTest {
 //    }
 //
 //    @Test
-//    void whenDecrementIsCalledToEmptyStockThenEmptyBeerStock() throws BeerNotFoundException, BeerStockExceededException {
+//    void whenDecrementIsCalledToEmptyStockThenEmptyBeerStock() {
 //        BeerDTO expectedBeerDTO = BeerDTOBuilder.builder().build().toBeerDTO();
 //        Beer expectedBeer = beerMapper.toModel(expectedBeerDTO);
 //
